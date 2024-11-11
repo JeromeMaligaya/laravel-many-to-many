@@ -38,6 +38,16 @@
                                 </p>
                             </div>
                             <div class="mb-2">
+                                <h5 class="mb-1">Technologies: </h5>
+                                <ul class="card-text fw-bolder p-0">
+                                    @foreach ($project->technologies as $singleTechnology)
+                                    <li>
+                                        {{ $singleTechnology->name }}
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="mb-2">
                                 <h5 class="mb-1">Description:</h5>
                                 <p class="card-text fw-bolder">
                                     {{ $project->description}}

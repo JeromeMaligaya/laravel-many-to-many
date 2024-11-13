@@ -40,6 +40,13 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
         $project = Project::create($data);
+
+        if (isset($data["technologies"])) {
+            $project->technologies()->sync($data["technologies"]);
+        } else {
+            $project->technologies()->detach();
+        }
+
         return redirect()->route("admin.projects.show", $project);
     }
 
@@ -69,6 +76,12 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
         $project->update($data);
+
+        if (isset($data["technologies"])) {
+            $project->technologies()->sync($data["technologies"]);
+        } else {
+            $project->technologies()->detach();
+        }
         return redirect()->route("admin.projects.show", $project);
     }
 

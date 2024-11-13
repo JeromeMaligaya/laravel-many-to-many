@@ -25,7 +25,9 @@ class StoreProjectRequest extends FormRequest
             "name" => ["required", "string", "min:3", "max:255"],
             "date" => ["required", "date"],
             "type_id" => ["required", "numeric", "integer", "exists:types,id"],
-            "description" => ["required", "string", "min:3", "max:255"],
+            "description" => ["required", "string", "min:1", "max:255"],
+            "technologies" => ["array"],
+            "technologies.*" => ["integer", "numeric", "exists:technologies,id", "min:1"],
         ];
     }
 

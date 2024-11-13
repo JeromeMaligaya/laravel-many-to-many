@@ -6,21 +6,44 @@
 <main>
     <section id="project-item">
         <div class="container">
-            <div id="project-card" class="card pt-2 mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">Name project: {{ $project->name }}</h5>
-                    <h5>Started on: {{ $project->date }}</h5>
-                    <div class="mb-2">
-                        <h5 class="mb-1">Languages used: </h5>
-                        <p class="card-text">
-                        {{ $project->languages}}
-                        </p>
-                    </div>
-                    <div class="mb-2">
-                        <h5 class="mb-1">Description:</h5>
-                        <p class="card-text">
-                            {{ $project->description}}
-                        </p>
+            <div class="row justify-content-center">
+                <div class="col-5">
+                    <div class="card pt-2 mb-2">
+                        <div class="card-body">
+                            <h3 class="card-title mb-3">Name project: {{ $project->name }}</h3>
+                            <div class="mb-2">
+                                <h5 class="mb-1">Started on: </h5>
+                                <p class="card-text">
+                                    {{ $project->date }}
+                                </p>
+                            </div>
+                            <div class="mb-2">
+                                <h5 class="mb-1">Type: </h5>
+                                <p class="card-text">
+                                    {{ $project->type->name}}
+                                </p>
+                            </div>
+                            <div class="mb-2">
+                                <h5 class="mb-1">Technologies used: </h5>
+                                <ul class="list-unstyled">
+                                @forelse ($project->technologies as $technology )
+                                    <li>
+                                        {{ $technology->name }}
+                                    </li>
+                                    @empty
+                                    <li>
+                                        <p>No technologies used</p>
+                                    </li>
+                                @endforelse
+                                </ul>
+                            </div>
+                            <div class="mb-2">
+                                <h5 class="mb-1">Description:</h5>
+                                <p class="card-text">
+                                    {{ $project->description}}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

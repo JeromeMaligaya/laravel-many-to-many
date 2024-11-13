@@ -60,6 +60,17 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="technology" class="form-label">Technologies:</label>
+                        @foreach ($technologies as $technology)
+                            <input type="checkbox" name="technologies[]" id="technology" class="form-check-input" value="{{ $technology->id }}"
+                                @checked(in_array($technology->id, old("technologies", $project->technologies->pluck("id")->toArray())))
+                            >
+                            {{ $technology->name}}
+                        @endforeach
+                    </div>
+
                     <div class="mb-3">
                         <label for="description" class="form-label">Description:</label>
                         <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{ old('description', $project->description) }}</textarea>

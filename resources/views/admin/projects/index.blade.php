@@ -40,11 +40,15 @@
                             <div class="mb-2">
                                 <h5 class="mb-1">Technologies: </h5>
                                 <ul class="card-text fw-bolder p-0">
-                                    @foreach ($project->technologies as $singleTechnology)
-                                    <li>
-                                        {{ $singleTechnology->name }}
-                                    </li>
-                                    @endforeach
+                                    @forelse ($project->technologies as $singleTechnology )
+                                        <li>
+                                            {{ $singleTechnology->name }}
+                                        </li>
+                                        @empty
+                                        <li>
+                                            <p>No technologies used</p>
+                                        </li>
+                                    @endforelse
                                 </ul>
                             </div>
                             <div class="mb-2">

@@ -20,7 +20,7 @@
                 @endif
             </div>
             <div class="col-5">
-                <form action="@yield("form-action")" method="POST">
+                <form action="@yield("form-action")" enctype="multipart/form-data" method="POST">
                     @yield("form-method")
                     @csrf
                     <div class="mb-3">
@@ -60,7 +60,6 @@
                             @endforeach
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label for="technology" class="form-label">Technologies:</label>
                         @foreach ($technologies as $technology)
@@ -70,7 +69,6 @@
                             {{ $technology->name}}
                         @endforeach
                     </div>
-
                     <div class="mb-3">
                         <label for="description" class="form-label">Description:</label>
                         <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{ old('description', $project->description) }}</textarea>
@@ -80,7 +78,7 @@
                          {{ $message }}
                     </div>
                     @enderror
-
+                    <input type="file" name="img_url" id="img_url" class="form-control mb-3">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="reset" class="btn btn-warning">Reset</button>
                     <a href="{{ route('admin.projects.index') }}" class="btn btn-success">Back to home</a>

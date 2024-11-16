@@ -28,6 +28,7 @@ class StoreProjectRequest extends FormRequest
             "description" => ["required", "string", "min:1", "max:255"],
             "technologies" => ["array"],
             "technologies.*" => ["integer", "numeric", "exists:technologies,id", "min:1"],
+            "img_url" => ["nullable", "file", "max:250"],
         ];
     }
 

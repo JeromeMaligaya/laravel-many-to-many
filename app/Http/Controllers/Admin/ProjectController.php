@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -38,7 +39,15 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+        // dd($request->file('img_url'));
         $data = $request->validated();
+
+        if ($request->hasFile('img_url')) {
+            $filePath = $request->file('img_url')->store('img/projects', 'public');
+            $data['img_url'] = $filePath;
+        }
+
+
         $project = Project::create($data);
 
         if (isset($data["technologies"])) {
@@ -75,6 +84,15 @@ class ProjectController extends Controller
     public function update(StoreProjectRequest $request, Project $project)
     {
         $data = $request->validated();
+
+        if ($request->hasFile("img_url")) {
+            if ($project->img_url) {
+                Storage::disk("public")->delete($project->img_url);
+            }
+            $filePath = Storage::disk("public")->put("img/projects/", $request->img_url);
+            $data["img_url"] = $filePath;
+        }
+
         $project->update($data);
 
         if (isset($data["technologies"])) {
